@@ -6,11 +6,28 @@
     <style>
         body { font-family: Arial, sans-serif; margin: 2em; }
         h1 { color: #2a5d84; }
-        .container { display: flex; align-items: flex-start; gap: 2em; }
-        .card { border: 1px solid #ddd; padding: 1em; border-radius: 4px; background-color: #f9f9f9; min-width: 300px; }
-        .form-group { margin-bottom: 1em; }
-        label { display: block; margin-bottom: 0.3em; }
-        input, select { width: 100%; padding: 0.5em; }
+        .container {
+            display: flex;
+            gap: 1em;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .card {
+            border: 1px solid #ddd;
+            padding: 1em;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            display: flex;
+            gap: 1em;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        label { margin-bottom: 0.3em; }
+        input, select { padding: 0.5em; }
     </style>
 </head>
 <body>
@@ -18,7 +35,7 @@
     <section>
         <h2>Lo que pasa en tu margen sin cobertura</h2>
         <div class="container">
-            <div>
+            <div class="form-group">
                 <label for="provincia">Selecciona tu provincia:</label>
                 <select id="provincia">
                     <option value="">-- Elegir --</option>
