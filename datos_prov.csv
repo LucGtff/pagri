@@ -1,0 +1,9 @@
+﻿province,cost (USD/ha),max yield (t/ha),min yield (t/ha),average yield (t/ha),stdev yield (t/ha)
+Buenos Aires,848.265,3.19,1.84,2.71,0.44
+Cordoba,833.715,3.44,1.45,2.84,0.49
+Corrientes,744.96,2.66,1.2,2.03,0.47
+Entre Rios,800.25,2.74,1.01,2.18,0.53
+La Pampa,634.38,3.00,1.67,2.35,0.56
+Salta,800.25,2.7,1.24,2.2,0.44
+Santa Fe,1067.97,3.45,1.42,2.8,0.5
+Santiago del Estero,791.52,3.36,1.12,2.63,0.68
