@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cobertura integral para el productor agropecuario</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2em; }
+        h1 { color: #2a5d84; }
+        .container { display: flex; align-items: flex-start; gap: 2em; }
+        .card { border: 1px solid #ddd; padding: 1em; border-radius: 4px; background-color: #f9f9f9; min-width: 300px; }
+        .form-group { margin-bottom: 1em; }
+        label { display: block; margin-bottom: 0.3em; }
+        input, select { width: 100%; padding: 0.5em; }
+    </style>
+</head>
+<body>
+    <h1>Cobertura integral para el productor agropecuario</h1>
+    <section>
+        <h2>Lo que pasa en tu margen sin cobertura</h2>
+        <div class="container">
+            <div>
+                <label for="provincia">Selecciona tu provincia:</label>
+                <select id="provincia">
+                    <option value="">-- Elegir --</option>
+                    <option value="Buenos Aires">Buenos Aires</option>
+                    <option value="Córdoba">Córdoba</option>
+                    <option value="Corrientes">Corrientes</option>
+                    <option value="Entre Ríos">Entre Ríos</option>
+                    <option value="La Pampa">La Pampa</option>
+                    <option value="Salta">Salta</option>
+                    <option value="Santa Fe">Santa Fe</option>
+                    <option value="Santiago del Estero">Santiago del Estero</option>
+                </select>
+            </div>
+            <div id="datos" class="card" style="display: none;">
+                <div class="form-group">
+                    <label for="cost">Costo (USD/ha)</label>
+                    <input type="number" id="cost" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="expYield">Rendimiento esperado (t/ha)</label>
+                    <input type="number" id="expYield" step="0.01">
+                </div>
+                <div class="form-group">
+                    <label for="sdYield">Desviación estándar (t/ha)</label>
+                    <input type="number" id="sdYield" step="0.01">
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        const data = {};
+
+        fetch('datos_prov.csv')
+            .then(resp => resp.text())
+            .then(text => {
+                const lines = text.trim().split(/\r?\n/);
+                lines.slice(1).forEach(line => {
+                    const [prov, cost, expYield, sdYield] = line.split(',');
+                    data[prov.trim()] = {
+                        cost: parseFloat(cost),
+                        expYield: parseFloat(expYield),
+                        sdYield: parseFloat(sdYield)
+                    };
+                });
+            });
+
+        const select = document.getElementById('provincia');
+        const datosDiv = document.getElementById('datos');
+        const costInput = document.getElementById('cost');
+        const expYieldInput = document.getElementById('expYield');
+        const sdYieldInput = document.getElementById('sdYield');
+
+        select.addEventListener('change', () => {
+            const prov = select.value;
+            if (data[prov]) {
+                const info = data[prov];
+                costInput.value = info.cost;
+                expYieldInput.value = info.expYield;
+                sdYieldInput.value = info.sdYield;
+                datosDiv.style.display = 'block';
+            } else {
+                datosDiv.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
