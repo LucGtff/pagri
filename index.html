@@ -10,74 +10,71 @@
         select, input { padding: 0.5em; margin-top: 0.3em; width: 100%; max-width: 400px; }
         .form-group { margin-bottom: 1em; }
         .card { border: 1px solid #ddd; padding: 1em; margin-top: 1em; border-radius: 4px; max-width: 420px; background-color: #f9f9f9; }
+        .container { display: flex; gap: 2em; flex-wrap: wrap; align-items: flex-start; }
     </style>
 </head>
 <body>
     <h1>Cobertura integral para el productor agropecuario</h1>
     <section>
         <h2>Lo que pasa en tu margen sin cobertura</h2>
-        <label for="provincia">Selecciona tu provincia:</label>
-        <select id="provincia">
-            <option value="">-- Elegir --</option>
-            <option value="Buenos Aires">Buenos Aires</option>
-            <option value="Cordoba">Córdoba</option>
-            <option value="Corrientes">Corrientes</option>
-            <option value="Entre Rios">Entre Ríos</option>
-            <option value="La Pampa">La Pampa</option>
-            <option value="Salta">Salta</option>
-            <option value="Santa Fe">Santa Fe</option>
-            <option value="Santiago del Estero">Santiago del Estero</option>
-        </select>
-        <div id="datos" class="card" style="display: none;">
-            <div class="form-group">
-                <label for="cost">Costo (USD/ha)</label>
-                <input type="number" id="cost" step="0.01"/>
+        <div class="container">
+            <div>
+                <label for="provincia">Selecciona tu provincia:</label>
+                <select id="provincia">
+                    <option value="">-- Elegir --</option>
+                    <option value="Buenos Aires">Buenos Aires</option>
+                    <option value="Cordoba">Córdoba</option>
+                    <option value="Corrientes">Corrientes</option>
+                    <option value="Entre Rios">Entre Ríos</option>
+                    <option value="La Pampa">La Pampa</option>
+                    <option value="Salta">Salta</option>
+                    <option value="Santa Fe">Santa Fe</option>
+                    <option value="Santiago del Estero">Santiago del Estero</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label for="maxYield">Rendimiento máximo (t/ha)</label>
-                <input type="number" id="maxYield" step="0.01"/>
-            </div>
-            <div class="form-group">
-                <label for="minYield">Rendimiento mínimo (t/ha)</label>
-                <input type="number" id="minYield" step="0.01"/>
-            </div>
-            <div class="form-group">
-                <label for="avgYield">Rendimiento promedio (t/ha)</label>
-                <input type="number" id="avgYield" step="0.01"/>
-            </div>
-            <div class="form-group">
-                <label for="sdYield">Desviación estándar del rendimiento (t/ha)</label>
-                <input type="number" id="sdYield" step="0.01"/>
+            <div id="datos" class="card" style="display: none;">
+                <div class="form-group">
+                    <label for="cost">Costo (USD/ha)</label>
+                    <input type="number" id="cost" step="0.01"/>
+                </div>
+                <div class="form-group">
+                    <label for="avgYield">Rendimiento esperado (t/ha)</label>
+                    <input type="number" id="avgYield" step="0.01"/>
+                </div>
+                <div class="form-group">
+                    <label for="sdYield">Desviación estándar del rendimiento (t/ha)</label>
+                    <input type="number" id="sdYield" step="0.01"/>
+                </div>
             </div>
         </div>
     </section>
     <script>
-        const csvData = `province,cost (USD/ha),max yield (t/ha),min yield (t/ha),average yield (t/ha),stdev yield (t/ha)
-Buenos Aires,848.265,3.19,1.84,2.71,0.44
-Cordoba,833.715,3.44,1.45,2.84,0.49
-Corrientes,744.96,2.66,1.2,2.03,0.47
-Entre Rios,800.25,2.74,1.01,2.18,0.53
-La Pampa,634.38,3.00,1.67,2.35,0.56
-Salta,800.25,2.7,1.24,2.2,0.44
-Santa Fe,1067.97,3.45,1.42,2.8,0.5
-Santiago del Estero,791.52,3.36,1.12,2.63,0.68`;
         const data = {};
-        csvData.trim().split('\n').slice(1).forEach(line => {
-            const [province, cost, maxYield, minYield, avgYield, sdYield] = line.split(',');
-            data[province.trim()] = {
-                cost: parseFloat(cost),
-                maxYield: parseFloat(maxYield),
-                minYield: parseFloat(minYield),
-                avgYield: parseFloat(avgYield),
-                sdYield: parseFloat(sdYield)
-            };
-        });
+
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            lines.slice(1).forEach(line => {
+                const [province, cost, avgYield, sdYield] = line.split(',');
+                data[province.trim()] = {
+                    cost: parseFloat(cost),
+                    avgYield: parseFloat(avgYield),
+                    sdYield: parseFloat(sdYield)
+                };
+            });
+        }
+
+        fetch('datos_prov.csv')
+            .then(r => r.text())
+            .then(t => {
+                if (t.charCodeAt(0) === 0xFEFF) {
+                    t = t.slice(1);
+                }
+                parseCSV(t);
+            });
 
         const select = document.getElementById('provincia');
         const datosDiv = document.getElementById('datos');
         const costInput = document.getElementById('cost');
-        const maxYieldInput = document.getElementById('maxYield');
-        const minYieldInput = document.getElementById('minYield');
         const avgYieldInput = document.getElementById('avgYield');
         const sdYieldInput = document.getElementById('sdYield');
 
@@ -86,14 +83,25 @@ Santiago del Estero,791.52,3.36,1.12,2.63,0.68`;
             if (data[prov]) {
                 const info = data[prov];
                 costInput.value = info.cost;
-                maxYieldInput.value = info.maxYield;
-                minYieldInput.value = info.minYield;
                 avgYieldInput.value = info.avgYield;
                 sdYieldInput.value = info.sdYield;
                 datosDiv.style.display = 'block';
             } else {
                 datosDiv.style.display = 'none';
             }
+        });
+
+        [costInput, avgYieldInput, sdYieldInput].forEach(inp => {
+            inp.addEventListener('change', () => {
+                const prov = select.value;
+                if (data[prov]) {
+                    data[prov] = {
+                        cost: parseFloat(costInput.value),
+                        avgYield: parseFloat(avgYieldInput.value),
+                        sdYield: parseFloat(sdYieldInput.value)
+                    };
+                }
+            });
         });
     </script>
 </body>
