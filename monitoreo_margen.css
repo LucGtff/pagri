@@ -1,0 +1,610 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+    line-height: 1.6;
+}
+
+
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #fcfcfc;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+
+.controls {
+    padding: 30px;
+    background: #fcfcfc;
+    border-bottom: 1px solid #e9ecef;
+}
+
+
+
+
+#primary-menu {
+background-color: #f1f1f1 !important;
+}
+
+.traveler-blog-lite-col-12.traveler-blog-lite-column,
+.top-header-menu,
+#site-navigation-top {
+  background-color: #f1f1f1 !important;
+}
+
+.traveler-blog-lite-col-1.traveler-blog-lite-column.floatright {
+    background-color: #f1f1f1 !important;
+  }
+
+  h1, h2,p {
+    color: #7A7A7A;
+  }
+
+.percentage-slider {
+    display: flex;
+    align-items: center;
+    gap: 2px; /* reduce gap between number and % */
+    flex: 1;
+}
+
+.percentage-slider input[type="range"] {
+    width: 66%; /* reduce to approx. 2/3 */
+    -webkit-appearance: none;
+    height: 6px;
+    border-radius: 3px;
+    background: #ddd;
+    outline: none;
+    transition: background 0.3s ease;
+}
+
+.percentage-slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #003366;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+
+.percentage-slider input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #003366;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.percentage-slider output {
+    font-size: 0.9rem;
+    min-width: 28px;
+    text-align: right;
+    color: #2c3e50;
+    margin-right: -2px; /* pulls number closer to % */
+}
+
+  
+.simulation-button {
+    background: #003366;
+    color: #fcfcfc;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: "Sora", Sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+    font-style: normal;
+    text-decoration: none;
+    line-height: 1em;
+    letter-spacing: 0px;
+    fill: #F2F2F2;
+    color: #F2F2F2;
+}
+
+.simulation-button:hover {
+    background:#fcfcfc;
+    color:  #003366;
+    border: 1px solid #003366;
+}
+
+.simulation-button:active {
+    background:#fcfcfc;
+    color:  #003366;
+    border: 1px solid #003366;
+}
+
+.simulation-button:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.charts-container {
+    padding: 30px;
+    background: #fcfcfc;
+}
+
+.two-column {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.column {
+    flex: 1;
+    min-width: 300px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    min-height: 500px;
+}
+
+.column.left {
+    flex: 4;
+    min-width: 300px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    min-height: 500px;
+}
+
+.column.right {
+    flex: 6;
+    min-width: 300px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    min-height: 500px;
+}
+
+.column .chart-panel {
+    background: #fcfcfc;
+    margin: 0;
+    height: calc(100% - 60px);
+}
+
+.section-title {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin: 40px 0 25px 0;
+    text-align: center;
+    font-weight: 400;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #003366;
+}
+
+.column-title {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding: 12px 0;
+    text-align: center;
+    font-weight: 500;
+    border-bottom: 2px solid #003366;
+    background: transparent;
+}
+
+.chart-panel {
+    margin-bottom: 50px;
+    margin-top: 50px;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    background:#fcfcfc;
+    min-height: 400 px;
+    padding: 10px;
+    position: relative;
+}
+
+.chart-panel > div {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 380px !important;
+}
+
+.chart-panel .plotly-graph-div {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 380px !important;
+}
+
+.progress-container {
+    margin-top: 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    overflow: hidden;
+    display: none;
+    border: 1px solid #e9ecef;
+}
+
+.progress-bar {
+    height: 4px;
+    background: #003366;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.form-group {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0;
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 0.9rem;
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.form-group input, .form-group select {
+    text-align: center;
+    width: 125px;
+    flex-shrink: 0;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background: #fcfcfc;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: #003366;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 250px;
+}
+
+.unit {
+    color: #666;
+    font-size: 0.8rem;
+    font-weight: normal;
+    margin-left: 5px;
+}
+
+.percentage-input {
+    position: relative;
+}
+
+.percentage-input input[type="number"] {
+    padding-right: 25px;
+}
+
+.percentage-input::after {
+    content: '%';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+
+.percentage-input input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+.running {
+    animation: pulse 1.5s infinite;
+}
+
+@media (max-width: 768px) {
+    .two-column {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+
+    
+    .container {
+        margin: 10px;
+        border-radius: 6px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-row .form-group {
+        min-width: 100%;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+    }
+
+    .form-group label {
+        white-space: normal;
+        text-overflow: initial;
+        overflow: visible;
+    }
+
+    .form-group input, .form-group select {
+        width: 100%;
+    }
+
+    .percentage-input {
+        width: 100%;
+    }
+
+    .controls, .charts-container {
+        padding: 20px;
+    }
+
+    .column {
+        padding: 15px;
+    }
+}
+
+
+/* Clean, professional button styling for secondary actions */
+.secondary-button {
+    background: transparent;
+    color: #003366;
+    border: 1px solid #003366;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.secondary-button:hover {
+    background:#fcfcfc;
+    color: #003366;
+}
+
+/* Professional table styling if needed */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: #fcfcfc;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.data-table th {
+    background: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.data-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+/* Accordion Styling */
+.accordion {
+    margin-bottom: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #fcfcfc;
+}
+
+.accordion-header {
+    background: transparent;
+    padding: 12px 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 2px solid #003366;
+    transition: background-color 0.3s ease;
+    user-select: none;
+}
+
+.accordion-title.right-aligned {
+    text-align: right;
+}
+
+.accordion-header.no-border {
+    border-bottom: none;
+}
+
+.accordion-title {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    font-weight: 500;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.accordion-icon {
+    font-size: 1.2rem;
+    margin-left: 10px;
+    color: #2c3e50;
+    transition: transform 0.3s ease;
+}
+
+.accordion-header.active {
+    background: transparent;
+    color: #2c3e50;
+}
+
+.accordion-header.active .accordion-title {
+    color: #2c3e50;
+}
+
+.accordion-header.active .accordion-icon {
+    transform: rotate(180deg);
+    color: #2c3e50;
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.3s ease;
+    padding: 0 20px;
+    background: #fcfcfc;
+}
+
+.accordion-content.active {
+    max-height: 2000px;
+    padding: 20px;
+    transition: max-height 0.4s ease-in, padding 0.3s ease;
+}
+
+/* Hide the header when accordion is active/open */
+.accordion-header.active {
+    display: none;
+}
+
+/* Make the content clickable when open */
+.accordion-content.active {
+    cursor: pointer;
+}
+
+.commentary-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    margin-top: 20px;
+}
+
+.commentary-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    color: #2c3e50;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.commentary-list li {
+    margin-bottom: 10px;
+}
+
+.definition-box {
+    background: #e9f7fd;
+    border-left: 4px solid #003366;
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #2c3e50;
+}
+
+
+/* Adjust section title for accordion */
+.section-title {
+    font-size: 1.6rem;
+    color: #2c3e50;
+    margin: 40px 0 25px 0;
+    text-align: center;
+    font-weight: 400;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #003366;
+}
+
+/* Ensure charts work well within accordions */
+.accordion-content .two-column {
+    margin-bottom: 0;
+}
+
+.accordion-content .chart-panel {
+    min-height: 350px;
+}
+
+.accordion-content .chart-panel > div,
+.accordion-content .chart-panel .plotly-graph-div {
+    min-height: 330px !important;
+}
+.result-card {
+    background: #fcfcfc;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.result-card h4 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.result-card .metric {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #003366;
+    margin-bottom: 5px;
+}
+
+.result-card .metric-label {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
